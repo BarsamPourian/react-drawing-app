@@ -1,13 +1,62 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  font-family: "Outfit";
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: "Outfit";
 }
+
+:root {
+  --silver-border: solid 1px #ddd;
+  --cell-size: 10px;
+}
+
+html {
+  background: #ddd;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+
+section {
+  margin-bottom: 1rem;
+}
+
+section:last-of-type {
+  margin-bottom: 0;
+}
+
+.row {
+  display: flex;
+}
+
+*:last-of-type > .cell {
+  border-bottom: var(--silver-border);
+}
+
+.cell {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-left: var(--silver-border);
+  border-top: var(--silver-border);
+  height: var(--cell-size);
+  width: var(--cell-size);
+  margin: 0;
+  cursor: pointer;
+}
+
+.cell:last-of-type {
+  border-right: var(--silver-border);
+}
+
+#ColorGrid {
+  width: 20px;
+  height: 20px;
+  }
+
