@@ -1,5 +1,7 @@
 * {
   font-family: "Outfit";
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -8,7 +10,7 @@ body {
 
 :root {
   --silver-border: solid 1px #ddd;
-  --cell-size: 10px;
+  --cell-size: 15px;
 }
 
 html {

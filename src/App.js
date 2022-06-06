@@ -1,8 +1,4 @@
 import React, { useState,useRef, useCallback } from "react";
-
-//import { ContextMenu, ContextMenuTrigger } from "react-contextmenu";
-import $ from 'jquery';
-
 import ContextMenu from "@agjs/react-right-click-menu";
 
 const COLORS = {
@@ -16,21 +12,15 @@ const GRID_ROWS = 100;
 const GRID_COLUMNS = 100;
 
 
-
 const isMouseDown = () => window.mouseDownState;
 
 window.addEventListener("mousedown", () => {
-  window.mouseDownState = 0;
+  window.mouseDownState = true;
 });
 window.addEventListener("mouseup", () => {
-  window.mouseDownState = 0;
+  window.mouseDownState = false;
 });
 
-///New right click menu
-
-
-
-///New right click menu
 
 export default function App() {
 
@@ -58,7 +48,6 @@ export default function App() {
   return (
     <main  >
 
-      <h2>To change the color press right click to open and close color palette</h2>
       <ContextMenu
         trigger={ref}
         component={<Foo />}
@@ -67,26 +56,6 @@ export default function App() {
       />
 
 
-  
-
-      {/* DRAWING GRID */}
-{/*       <ContextMenuTrigger id="contextmenu">
-        <ContextMenu id="contextmenu">
-          <div style={{ padding: 10, }}>
-            <p>
-              Color: <CellButton color={activeColor} />
-            </p>
-            {Object.entries(COLORS).map(([key, value]) => (
-              <CellButton
-                key={key}
-                title={`Select color: ${key}`}
-                color={value}
-                onClick={() => setActiveColor(value)}
-                id="ColorGrid"
-              />
-            ))}
-          </div>
-        </ContextMenu> */}
 <div ref={ref} >
 
         {Array.from({ length: GRID_ROWS }).map((_, i) => (
@@ -97,8 +66,6 @@ export default function App() {
           </div>
         ))}
 </div>
-    {/*   </ContextMenuTrigger> */}
-      {/* DRAWING GRID */}
     </main>
   );
 }
@@ -111,16 +78,23 @@ const Cell = ({
   const [color, setColor] = useState(COLORS.white);
 
   const handleMouseDown = useCallback(() => {
-
     setColor(activeColor);
     onChange(id, activeColor);
+  }, [activeColor, id, onChange]);
+
+  const handleMouseOver = useCallback(() => {
+    if (isMouseDown()) {
+      setColor(activeColor);
+      onChange(id, activeColor);
+    }
   }, [activeColor, id, onChange]);
 
 
 
   return (
     <CellButton
-      onMouseDown={handleMouseDown}
+    onMouseDown={handleMouseDown}
+    onMouseOver={handleMouseOver}
       color={color}
     />
   );
