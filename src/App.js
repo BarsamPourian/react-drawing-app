@@ -30,7 +30,7 @@ export default function App() {
   const ColorMenu = () =>
     <div id="contextmenu" style={{ margin: 0, padding: 0, backgroundColor: 'gray' }}>
       <div style={{ padding: 10, }}>
-        <p style={{ marginBottom: 2}}>
+        <p style={{ marginBottom: 2 }}>
           Color: <Square color={activeColor} />
         </p>
         {Object.entries(COLORS).map(([key, value]) => (
@@ -45,23 +45,25 @@ export default function App() {
     </div>;
 
   return (
-    <main  >
+    <div>
       <ContextMenu
         trigger={ref}
         component={<ColorMenu />}
         isOpen={isMenuShown}
         setIsOpen={setIsMenuShown}
       />
-      <div ref={ref} >
-        {Array.from({ length: GRID_ROWS }).map((_, i) => (
-          <div className="row" key={i}>
-            {Array.from({ length: GRID_COLUMNS }).map((_, j) => (
-              <Squares key={j} id={`${j},${i}`} activeColor={activeColor} />
-            ))}
-          </div>
-        ))}
-      </div>
-    </main>
+      <main>
+        <div ref={ref} id="Grid" >
+          {Array.from({ length: GRID_ROWS }).map((_, i) => (
+            <div className="row" key={i}>
+              {Array.from({ length: GRID_COLUMNS }).map((_, j) => (
+                <Squares key={j} id={`${j},${i}`} activeColor={activeColor} />
+              ))}
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
   );
 }
 
