@@ -1,4 +1,4 @@
-import React, { useState,useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import ContextMenu from "@agjs/react-right-click-menu";
 
 const COLORS = {
@@ -11,7 +11,6 @@ const COLORS = {
 const GRID_ROWS = 100;
 const GRID_COLUMNS = 100;
 
-
 const isMouseDown = () => window.mouseDownState;
 
 window.addEventListener("mousedown", () => {
@@ -21,56 +20,52 @@ window.addEventListener("mouseup", () => {
   window.mouseDownState = false;
 });
 
-
 export default function App() {
 
   const [activeColor, setActiveColor] = useState(COLORS.red);
+
   const [isMenuShown, setIsMenuShown] = useState(false);
   const ref = useRef();
 
-  const Foo = () => <div id="contextmenu" style={{ margin: 0, padding: 0, backgroundColor: '#fff' }}>
-            <div style={{ padding: 10, }}>
-            <p>
-              Color: <CellButton color={activeColor} />
-            </p>
-            {Object.entries(COLORS).map(([key, value]) => (
-              <CellButton
-                key={key}
-                title={`Select color: ${key}`}
-                color={value}
-                onClick={() => setActiveColor(value)}
-                id="ColorGrid"
-              />
-            ))}
-          </div>
-</div>;
+  const ColorMenu = () =>
+    <div id="contextmenu" style={{ margin: 0, padding: 0, backgroundColor: 'gray' }}>
+      <div style={{ padding: 10, }}>
+        <p style={{ marginBottom: 2}}>
+          Color: <Square color={activeColor} />
+        </p>
+        {Object.entries(COLORS).map(([key, value]) => (
+          <Square
+            key={key}
+            color={value}
+            onClick={() => setActiveColor(value)}
+            id="ColorSquare"
+          />
+        ))}
+      </div>
+    </div>;
 
   return (
     <main  >
-
       <ContextMenu
         trigger={ref}
-        component={<Foo />}
+        component={<ColorMenu />}
         isOpen={isMenuShown}
         setIsOpen={setIsMenuShown}
       />
-
-
-<div ref={ref} >
-
+      <div ref={ref} >
         {Array.from({ length: GRID_ROWS }).map((_, i) => (
           <div className="row" key={i}>
             {Array.from({ length: GRID_COLUMNS }).map((_, j) => (
-              <Cell key={j} id={`${j},${i}`} activeColor={activeColor} />
+              <Squares key={j} id={`${j},${i}`} activeColor={activeColor} />
             ))}
           </div>
         ))}
-</div>
+      </div>
     </main>
   );
 }
 
-const Cell = ({
+const Squares = ({
   id,
   activeColor,
   onChange = (id, c) => console.log(id, c)
@@ -89,19 +84,17 @@ const Cell = ({
     }
   }, [activeColor, id, onChange]);
 
-
-
   return (
-    <CellButton
-    onMouseDown={handleMouseDown}
-    onMouseOver={handleMouseOver}
+    <Square
+      onMouseDown={handleMouseDown}
+      onMouseOver={handleMouseOver}
       color={color}
     />
   );
 };
 
-const CellButton = ({ color, ...otherProps }) => {
+const Square = ({ color, ...otherProps }) => {
   return (
-    <span style={{ backgroundColor: color }} className="cell" {...otherProps} />
+    <span style={{ backgroundColor: color }} className="square" {...otherProps} />
   );
 };
