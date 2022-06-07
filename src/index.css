@@ -8,7 +8,7 @@
 
 :root {
   --silver-border: solid 1px #ddd;
-  --cell-size: 15px;
+  --square-size: 15px;
 }
 
 
@@ -30,8 +30,8 @@ main {
   border: none;
   border-left: var(--silver-border);
   border-top: var(--silver-border);
-  height: var(--cell-size);
-  width: var(--cell-size);
+  height: var(--square-size);
+  width: var(--square-size);
   margin: 0;
   cursor: pointer;
 }

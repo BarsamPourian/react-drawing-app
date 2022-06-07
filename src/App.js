@@ -67,11 +67,8 @@ export default function App() {
   );
 }
 
-const Squares = ({
-  id,
-  activeColor,
-  onChange = (id, c) => console.log(id, c)
-}) => {
+const Squares = ({ id, activeColor, onChange = (id, c) => console.log(id, c) }) => {
+  
   const [color, setColor] = useState(COLORS.white);
 
   const handleMouseDown = useCallback(() => {
